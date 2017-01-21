@@ -51,8 +51,11 @@ function sendVideo(urlObject) {
                   if (err) {
                       console.log(err)
                   }
-              });
-            })
+              })
+            }
+          }
+        }
+
 
             // slack = new Slack();
             // slack.setWebhook(urlObject.response_url);
@@ -72,9 +75,9 @@ function sendVideo(urlObject) {
             //         console.log(err)
             //     }
             // });
-        }
-    })
-}
+//         }
+//     })
+// }
 
 function sendMessage(urlObject) {
 
