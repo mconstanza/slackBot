@@ -14,19 +14,20 @@ app.get('/', function(request, response) {
 
     var urlObject = url.parse(request.url, true).query
     console.log(urlObject)
-    getVideo(urlObject);
+    sendVideo(urlObject);
 
 
 }); //app.get
 
 /////////////// THE SEND MESSAGE //////////////////////////////////////////
-function getVideo(urlObject) {
+function sendVideo(urlObject) {
     var query = urlObject.text;
 
     request('https://www.googleapis.com/youtube/v3/search?type=video&part=' + query, function(error, response, body) {
         if (!error && response.statusCode == 200) {
+          console.log("Response: ", response)
             var baseURL = 'https://www.youtube.com/watch?v=';
-            var videoURL = baseURL + response.id.videoId;
+            var video = baseURL + response.id.videoId;
 
             slack = new Slack();
             slack.setWebhook(urlObject.response_url);
