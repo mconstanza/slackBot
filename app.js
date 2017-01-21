@@ -14,9 +14,12 @@ app.get('/', function(request, response) {
 
     var urlObject = url.parse(request.url, true).query
     console.log(urlObject)
-    var video = getVideo(urlObject);
+    var videoURL = getVideo(urlObject);
+    var object = {
+      'text': videoURL
+    }
 
-    response.send(video);
+    response.send(object);
 
 }); //app.get
 
@@ -28,7 +31,7 @@ function getVideo(urlObject) {
         if (!error && response.statusCode == 200) {
             var baseURL = 'https://www.youtube.com/watch?v=';
             var video = baseURL + response.id.videoId;
-            return video
+            return videoURL
         }
     })
 }
