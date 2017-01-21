@@ -25,9 +25,9 @@ function sendVideo(urlObject) {
 
     request('https://www.googleapis.com/youtube/v3/search?part=snippet&q='+ query +'&type=video&key=AIzaSyAPF280wWDUXe8i6RdW8gQ3_RnQMOP4BXk', function(error, response, body) {
         if (!error && response.statusCode == 200) {
-          console.log("Response: ", response.body.items)
+          console.log("Response: ", response.body)
             var baseURL = 'https://www.youtube.com/watch?v=';
-            var video = baseURL + response.body.items[0].id.videoId;
+            var video = baseURL + response.body.id.videoId;
 
             slack = new Slack();
             slack.setWebhook(urlObject.response_url);
