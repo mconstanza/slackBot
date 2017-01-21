@@ -53,7 +53,7 @@ function sendVideo(urlObject) {
                   }
               })
             }
-          }
+          })
         }
 
 
