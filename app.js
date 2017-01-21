@@ -1,4 +1,4 @@
-    var Slack = require('slack-node');
+var Slack = require('slack-node');
 var express = require('express');
 var url = require('url');
 var app = express();
@@ -14,12 +14,27 @@ app.get('/', function(request, response) {
 
     var urlObject = url.parse(request.url,true).query
     console.log(urlObject)
-    sendMessage(urlObject);
+    var video = getVideo(urlObject);
+
+    res.send(video);
 
 }); //app.get
 
 
 /////////////// THE SEND MESSAGE //////////////////////////////////////////
+function getVideo(urlObject){
+  var query = urlObject.text;
+
+  request('https://www.googleapis.com/youtube/v3/search?type=video&part=' + query, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var baseURL = 'https://www.youtube.com/watch?v=';
+      var video = baseURL + response.id.videoId;
+  })
+
+}
+
+
+
 
 function sendMessage(urlObject){
 
