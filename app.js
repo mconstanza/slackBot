@@ -1,8 +1,13 @@
-var Slack = require('slack-node');
 var express = require('express');
 var url = require('url');
 var app = express();
 var request = require('request');
+
+// SLACK SETUP /////
+var Slack = require('slack-node');
+// Slack Client ID
+apiToken = "Q2P3hnmutr1SMFwJatDoCrFY";
+slack = new Slack(apiToken);
 
 ////////////// THE SETUP ///////////////////////////////////////////
 
@@ -29,31 +34,51 @@ function sendVideo(urlObject) {
             var baseURL = 'https://www.youtube.com/watch?v=';
             var videoURL = baseURL + object.items[0].id.videoId
 
-            slack = new Slack();
-            slack.setWebhook(urlObject.response_url);
+            slack.api('chat.postMessage', {
+                  "channel": urlObject.channel_name,
+                  "text": videoURL,
+                  token: token,
+                  unfurl_links: true,
+                  unfurl_media: true,
+                  "attachments": [
+                    {
+                    "title": object.items[0].snippet.title,
+                    "title_link": videoURL
+                    }
+                  ]
 
-            slack.webhook({
-                "channel": urlObject.channel_name,
-                "text": videoURL,
-                "attachments": [
-                  {
-                  "title": object.items[0].snippet.title,
-                  "title_link": videoURL
+              }, function(err, response) {
+                  if (err) {
+                      console.log(err)
                   }
-                ]
+              });
+            })
 
-            }, function(err, response) {
-                if (err) {
-                    console.log(err)
-                }
-            });
+            // slack = new Slack();
+            // slack.setWebhook(urlObject.response_url);
+            //
+            // slack.webhook({
+            //     "channel": urlObject.channel_name,
+            //     "text": videoURL,
+            //     "attachments": [
+            //       {
+            //       "title": object.items[0].snippet.title,
+            //       "title_link": videoURL
+            //       }
+            //     ]
+            //
+            // }, function(err, response) {
+            //     if (err) {
+            //         console.log(err)
+            //     }
+            // });
         }
     })
 }
 
 function sendMessage(urlObject) {
 
-    slack = new Slack();
+    // slack = new Slack();
     slack.setWebhook(urlObject.response_url);
 
     //   /mySlashCommand catfish    'catfish' is stored in var userCommand
