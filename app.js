@@ -25,8 +25,7 @@ function sendVideo(urlObject) {
 
     request('https://www.googleapis.com/youtube/v3/search?part=snippet&q='+ query +'&type=video&key=AIzaSyAPF280wWDUXe8i6RdW8gQ3_RnQMOP4BXk', function(error, response, body) {
         if (!error && response.statusCode == 200) {
-          console.log("Response: ", response.body.type)
-          var object = JSON.parse(response.body);
+            var object = JSON.parse(response.body);
             var baseURL = 'https://www.youtube.com/watch?v=';
             var videoURL = baseURL + object.items[0].id.videoId
 
@@ -34,11 +33,12 @@ function sendVideo(urlObject) {
             slack.setWebhook(urlObject.response_url);
 
             slack.webhook({
-                channel: urlObject.channel_name,
-                text: videoURL,
-                attachments: [
+                "channel": urlObject.channel_name,
+                "text": videoURL,
+                "attachments": [
                   {
-                  title_link: videoURL
+                  "title_link": videoURL,
+                  "text": "test"
                   }
                 ]
 
