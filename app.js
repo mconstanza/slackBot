@@ -37,8 +37,8 @@ function sendVideo(urlObject) {
                 "text": videoURL,
                 "attachments": [
                   {
-                  "title_link": videoURL,
-                  "text": "test"
+                  "title": object.items[0].snippet.title,
+                  "title_link": videoURL
                   }
                 ]
 
