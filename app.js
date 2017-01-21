@@ -28,7 +28,7 @@ function sendVideo(urlObject) {
           console.log("Response: ", response.body.type)
           var object = JSON.parse(response.body);
             var baseURL = 'https://www.youtube.com/watch?v=';
-            var video = baseURL + object.items[0].id.videoId
+            var videoURL = baseURL + object.items[0].id.videoId
 
             slack = new Slack();
             slack.setWebhook(urlObject.response_url);
