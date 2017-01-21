@@ -2,6 +2,7 @@ var Slack = require('slack-node');
 var express = require('express');
 var url = require('url');
 var app = express();
+var request = require('request');
 
 ////////////// THE SETUP ///////////////////////////////////////////
 
