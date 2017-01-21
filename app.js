@@ -37,6 +37,9 @@ function sendVideo(urlObject) {
                 channel: urlObject.channel_name,
 
                 text: videoURL
+                attachment: {
+                  title_link: videoURL
+                }
 
             }, function(err, response) {
                 if (err) {
