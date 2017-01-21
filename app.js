@@ -14,12 +14,8 @@ app.get('/', function(request, response) {
 
     var urlObject = url.parse(request.url, true).query
     console.log(urlObject)
-    var videoURL = getVideo(urlObject);
-    var object = {
-      'text': videoURL
-    }
+    getVideo(urlObject);
 
-    response.send(object);
 
 }); //app.get
 
@@ -30,8 +26,21 @@ function getVideo(urlObject) {
     request('https://www.googleapis.com/youtube/v3/search?type=video&part=' + query, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var baseURL = 'https://www.youtube.com/watch?v=';
-            var video = baseURL + response.id.videoId;
-            return videoURL
+            var videoURL = baseURL + response.id.videoId;
+
+            slack = new Slack();
+            slack.setWebhook(urlObject.response_url);
+
+            slack.webhook({
+                channel: urlObject.channel_name,
+
+                text: videoURL
+
+            }, function(err, response) {
+                if (err) {
+                    console.log(err)
+                }
+            });
         }
     })
 }
