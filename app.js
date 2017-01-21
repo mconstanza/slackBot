@@ -36,8 +36,8 @@ function sendVideo(urlObject) {
             slack.webhook({
                 channel: urlObject.channel_name,
 
-                text: videoURL
-                attachment: {
+                text: videoURL,
+                attachments: {
                   title_link: videoURL
                 }
 
