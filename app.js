@@ -29,6 +29,7 @@ function getVideo(urlObject){
     if (!error && response.statusCode == 200) {
       var baseURL = 'https://www.youtube.com/watch?v=';
       var video = baseURL + response.id.videoId;
+      return video
   })
 
 }
