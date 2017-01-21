@@ -28,8 +28,8 @@ function getVideo(urlObject) {
             var baseURL = 'https://www.youtube.com/watch?v=';
             var video = baseURL + response.id.videoId;
             return video
-        })
-    }
+        }
+    })
 }
 
 function sendMessage(urlObject) {
