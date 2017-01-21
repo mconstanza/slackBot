@@ -16,7 +16,7 @@ app.get('/', function(request, response) {
     console.log(urlObject)
     var video = getVideo(urlObject);
 
-    res.send(video);
+    response.send(video);
 
 }); //app.get
 
