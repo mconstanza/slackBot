@@ -27,7 +27,8 @@ function sendVideo(urlObject) {
         if (!error && response.statusCode == 200) {
           console.log("Response: ", response.body)
             var baseURL = 'https://www.youtube.com/watch?v=';
-            var video = baseURL + response.body.items[0].id.videoId;
+            console.log(response.body["items"], "items")
+            var video = baseURL + response.body['items'][0]['id']['videoId']
 
             slack = new Slack();
             slack.setWebhook(urlObject.response_url);
