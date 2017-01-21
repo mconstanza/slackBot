@@ -35,11 +35,11 @@ function sendVideo(urlObject) {
             var videoURL = baseURL + object.items[0].id.videoId
 
             slack.api('chat.postMessage', {
-                  "channel": urlObject.channel_name,
+                  "channel": 'testchannel',
                   "text": videoURL,
-                  token: apiToken,
-                  unfurl_links: true,
-                  unfurl_media: true,
+                  "token": apiToken,
+                  "unfurl_links": true,
+                  "unfurl_media": true,
                   "attachments": [
                     {
                     "title": object.items[0].snippet.title,
